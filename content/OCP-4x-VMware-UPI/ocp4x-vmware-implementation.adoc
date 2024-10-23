@@ -1,4 +1,4 @@
-= TODO_NOMBRE_ENTORNO
+= CLUSTER OCP 4.14 - COCLCOREPUBOCP2
 TODO Descripción del entorno
 
 == Información del dominio
@@ -7,56 +7,63 @@ Dominio: `{ocp_cluster1_base_domain}` +
 Nombre del Cluster: `{ocp_cluster1_name}`
 
 == Información de VMware
-Los siguiente datos de VMware han sido configurados en el cluster de OpenShift:
+Para la arquitectura definida se consideran los siguientes datos correspondientes al aprovisionamiento de las máquinas virtuales necesarias para la generación del cluster:
 
 .VMware Data
 [options="header"]
 |===
 |Parametro de VMware | Valor
 
-|VCENTER_SERVER
-|vcsa.rhbr-labs.com
+|vSpehere version
+|8.0.2.00200
 
-|VCENTER_SERVER
-|vcsa.rhbr-labs.com
+|vSphere vCenter Host
+|co01vcentercbt.corp.popular.local
 
-|VCENTER_USER
-|administrator@vsphere.local
+|VvSphere vCenter Username
+|ntas\_openshiftcbt
 
-|VCENTER_PASSWORD
-|<hidden>
+|vSphere vCenter Datacenter
+|CORE_BANCARIO_CO
 
-|VCENTER_DC
-|rhbr-labs-dc
+|vSphere vCenter Cluster
+|COCLHSHYPCBT1
 
-|VCENTER_DS
-|rhbr-labs-ds
+|vSphere vCenter Default Datastore
+|DS_CBT_COCLCOREPUBOCP2
+
+|Multicast Enabled
+|Si
+
+|Almacenamiento Datastore requerido
+|2328 Gi
 
 |===
 
 == Información de la red
-
+Se define a continuación las configuraciones de redes necesarias para el aprovisionamiento del cluster. 
 .Network Data
 [options="header"]
 |===
 |Nombre | CIDR Bloque o Valor | Comentarios
 
 |VNet
-|
-|
+|10.32.75.0/24
+|Red definida para el direccionamiento de los nodos del cluster
 
 |Pod Network
-|/16
-| IP Addresses
+|10.71.0.0/16
+|Red no enrutable para los pods del cluster
 
 |Service Network
-|/16
-| IP Addresses
+|10.72.0.0/16
+|Red no enrutable para los objetos services del cluster.
 
-|Host Subnet Length
-|9
-|Esto le dice a OpenShift que debe configurar un /23 (32-9) de [Pod Network] en cada nodo.
-NOTA: El valor por defecto de subred es /9. Este valor deberá ser reducido para rangos de CIDR más chicos.
+|LoadBalancers Network
+a|
+- 10.32.0.0/16 - Datacenter CO
+- 10.16.0.0/16 - Cluster Citrix LB 
+|Red definida para las VIP de los balanceadores.
 
 |===
 
@@ -65,67 +72,67 @@ NOTA: El valor por defecto de subred es /9. Este valor deberá ser reducido para
 .Nodes Data
 [options="header"]
 |===
-|Server FQDN |IP |Rol | Subs Utilizadas |Labels
+|Nombre |Rol |IP |Gateway
 
-|
-|
-|Master
-|N/A
-| #TODO#
+|COHVCAWNOPB01
+|Worker
+|10.32.75.20
+|10.32.75.1
 
-|
-|
-|Master
-|N/A
-| #TODO#
+|COHVCAWNOPB02
+|Worker
+|10.32.75.21
+|10.32.75.1
 
-|
-|
-|Master
-|N/A
-| #TODO#
+|COHVCAWNOPB03
+|Worker
+|10.32.75.22
+|10.32.75.1
 
-|
-|
+|COHVCAWNOPB04
+|Worker
+|10.32.75.23
+|10.32.75.1
+
+|COHVCIWNOPB01
 |Infra
-|N/A
-| #TODO#
+|10.32.75.24
+|10.32.75.1
 
-|
-|
+|COHVCIWNOPB02
 |Infra
-|N/A
-| #TODO#
+|10.32.75.25
+|10.32.75.1
 
-|
-|
+|COHVCIWNOPB03
 |Infra
-|N/A
-| #TODO#
+|10.32.75.26
+|10.32.75.1
 
-|
-|
-|Application
-|1
-| #TODO#
+|COHVCMANOPB01
+|Master
+|10.32.75.27
+|10.32.75.1
 
-|
-|
-|Application
-|1
-| #TODO#
+|COHVCMANOPB02
+|Master
+|10.32.75.28
+|10.32.75.1
 
-|
-|
-|Application
-|1
-| #TODO#
+|COHVCMANOPB03
+|Master
+|10.32.75.29
+|10.32.75.1
 
-|
-|
+|COHVCBANOPB01
 |Bastion
-|N/A
-| N/A
+|10.32.75.30
+|10.32.75.1
+
+|COHVCBSTOPB01
+|Bootstrap
+|10.32.75.71
+|10.32.75.1
 
 |===
 
@@ -136,25 +143,28 @@ NOTA: El valor por defecto de subred es /9. Este valor deberá ser reducido para
 .Storage Data
 [options="header"]
 |===
-|Aplicación |Tipo de Storage  |Backend de Storage |Tamaño
+|Aplicación |Tipo de Storage  |Backend de Storage |Tamaño (Gi)
 
 |Metrics
 |Block
-|VMWare (thin storage class)
-|30GB
+|thin-csi
+a| 110Gi Total:
+
+* Prometheus: 2 x 40Gi=80Gi 
+* AlertManager: 3 x 10Gi=30Gi
 
 |Logging
-|Block
-|
-|
+|N/A
+|N/A
+|N/A
 
 |Registry
-|File
-|
-|
+|Object
+|N/A
+|100+ Gi
 
 |Application
-|File
-|
-|
+|-
+|-
+|-
 |===

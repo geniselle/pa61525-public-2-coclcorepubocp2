@@ -16,24 +16,31 @@ was actively involved (i.e. attending status calls, escalations etc...)
 |Correo Electronico
 
 // Nombre
-| #TODO#
+| Juan Saldarriaga
 // Titulo
 | Project Manager
 // Correo Electronico
-| #TODO#
+| jsaldarr@redhat.com
 
 // Nombre
-| #TODO#
+| Jonatan Ausique
 // Titulo
 | Arquitecto
 // Correo Electronico
-| #TODO#
+| joausiqu@redhat.com
 
 // Nombre
-| #TODO#
+| Jorge Varela
+// Titulo
+| Consultor/Implementador
+// Correo Electronico
+| jvarela@redhat.com
+
+// Nombre
+| Camila Pino
 // Titulo
 | Consultor
 // Correo Electronico
-| #TODO#
+| cpino@redhat.com
 
 |===

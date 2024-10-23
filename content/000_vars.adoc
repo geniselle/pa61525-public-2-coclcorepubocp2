@@ -8,17 +8,30 @@ If the product directory is missing a corresponding "vars.adoc", vars are not
 used for it or can be found in the default vars/redhat-vars.adoc
 ////
 
-:titulo: {subject}
-:cliente: {customer}
-:descripción: {description}
-:ocp_version: 4.3
+:titulo: Documento de Arquitectura OpenShift Container Platform - T-Menos
+:cliente: Banco Popular Dominicano
+:descripción: Ambiente COCLCOREPUBOCP2
+:ocp_version: 4.14
+
+:ocp_cluster1_name: coclcorepubocp2
+:ocp_cluster1_base_domain: corp.popular.local
+
+:ocp_bastion_cpu: 4
+:ocp_bastion_memory: 16 GB
+:ocp_bastion_disk: 80 GB
+
 :ocp_bootstrap_cpu: 4
 :ocp_bootstrap_memory: 16 GB
-:ocp_bootstrap_disk: 120 GB
+:ocp_bootstrap_disk: 150 GB
 
 :ocp_cluster1_master_cpu: 4
 :ocp_cluster1_master_memory: 16 GB
-:ocp_cluster1_master_disk: 120 GB
-:ocp_cluster1_worker_cpu: 4
-:ocp_cluster1_worker_memory: 16 GB
-:ocp_cluster1_worker_disk: 120 GB
+:ocp_cluster1_master_disk: 150 GB
+
+:ocp_cluster1_worker_cpu: 8
+:ocp_cluster1_worker_memory: 40 GB
+:ocp_cluster1_worker_disk: 150 GB
+
+:ocp_cluster1_infra_cpu: 4
+:ocp_cluster1_infra_memory: 24 GB
+:ocp_cluster1_infra_disk: 150 GB

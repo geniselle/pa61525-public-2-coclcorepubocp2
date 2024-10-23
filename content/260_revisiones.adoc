@@ -22,32 +22,28 @@ additions and customer requested updates.
 #TODO#
 ////
 .Revisión de la documentación
-[cols="1,2,5",options=header]
+[options=header]
 |===
-|Versión
-|Fecha
-|Cambios
+|Versión |Fecha |Autor |Función |Descripción
+// Version
+| 1.0
+// Date
+| 2024-09-23
+// Autor
+|Jonathan Ausique
+//Función
+|Arquitecto
+//Descripción
+|Versión inicial
 
 // Version
-| 0
-
+| x.x
 // Date
-| #TODO#
-
-// Changes
-a|
-- Creación inicial
-
-
-// Version
-| #TODO#
-
-// Date
-| #TODO#
-
-// Changes
-a|
-- #TODO#
-- #TODO#
-
+| aaaa-mm-dd
+// Autor
+|Autor
+//Función
+|-
+//Descripción
+|-
 |===
