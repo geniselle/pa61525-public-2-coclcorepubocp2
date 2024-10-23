@@ -1,0 +1,160 @@
+= TODO_NOMBRE_ENTORNO
+TODO Descripción del entorno
+
+== Información del dominio
+
+Dominio: `{ocp_cluster1_base_domain}` +
+Nombre del Cluster: `{ocp_cluster1_name}`
+
+== Información de VMware
+Los siguiente datos de VMware han sido configurados en el cluster de OpenShift:
+
+.VMware Data
+[options="header"]
+|===
+|Parametro de VMware | Valor
+
+|VCENTER_SERVER
+|vcsa.rhbr-labs.com
+
+|VCENTER_SERVER
+|vcsa.rhbr-labs.com
+
+|VCENTER_USER
+|administrator@vsphere.local
+
+|VCENTER_PASSWORD
+|<hidden>
+
+|VCENTER_DC
+|rhbr-labs-dc
+
+|VCENTER_DS
+|rhbr-labs-ds
+
+|===
+
+== Información de la red
+
+.Network Data
+[options="header"]
+|===
+|Nombre | CIDR Bloque o Valor | Comentarios
+
+|VNet
+|
+|
+
+|Pod Network
+|/16
+| IP Addresses
+
+|Service Network
+|/16
+| IP Addresses
+
+|Host Subnet Length
+|9
+|Esto le dice a OpenShift que debe configurar un /23 (32-9) de [Pod Network] en cada nodo.
+NOTA: El valor por defecto de subred es /9. Este valor deberá ser reducido para rangos de CIDR más chicos.
+
+|===
+
+== Información de los nodos
+
+.Nodes Data
+[options="header"]
+|===
+|Server FQDN |IP |Rol | Subs Utilizadas |Labels
+
+|
+|
+|Master
+|N/A
+| #TODO#
+
+|
+|
+|Master
+|N/A
+| #TODO#
+
+|
+|
+|Master
+|N/A
+| #TODO#
+
+|
+|
+|Infra
+|N/A
+| #TODO#
+
+|
+|
+|Infra
+|N/A
+| #TODO#
+
+|
+|
+|Infra
+|N/A
+| #TODO#
+
+|
+|
+|Application
+|1
+| #TODO#
+
+|
+|
+|Application
+|1
+| #TODO#
+
+|
+|
+|Application
+|1
+| #TODO#
+
+|
+|
+|Bastion
+|N/A
+| N/A
+
+|===
+
+
+
+== Información de Storage
+
+.Storage Data
+[options="header"]
+|===
+|Aplicación |Tipo de Storage  |Backend de Storage |Tamaño
+
+|Metrics
+|Block
+|VMWare (thin storage class)
+|30GB
+
+|Logging
+|Block
+|
+|
+
+|Registry
+|File
+|
+|
+
+|Application
+|File
+|
+|
+|===

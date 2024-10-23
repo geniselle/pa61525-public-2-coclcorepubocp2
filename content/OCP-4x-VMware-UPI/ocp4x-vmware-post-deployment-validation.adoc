@@ -1,0 +1,141 @@
+= Lista de verificación del entorno posterior a la implementación
+
+== Verificación del entorno TODO_ENV_NAME (#TODO#: copiar esto para cada clúster)
+
+.Disponibilidad y recuperación de clústeres
+[cols="85%,15%",options="header"]
+|===
+| *Requisito*  |  *Resultado*
+
+| Plan ante la falla de nodos, rack o AZ
+| #TODO#
+
+| Plan ante la falla del centro de datos/región
+| #TODO#
+
+| Dominios de Anti-Afinidad/Falla para los Nodos Master
+| #TODO#
+
+| Dominios de Anti-Afinidad/Falla para los Nodod Infra
+| #TODO#
+
+| Planificación de la capacidad del clúster
+| #TODO#
+
+| Capacidad del Cluster ante una falla de Nodos/Racks
+| #TODO#
+
+| SLA definido para el clúster OCP: ¿soporta la arquitectura implementada el SLA previsto?
+| #TODO#
+
+a| SLA documentados para las dependencias. Deberían abarcar:
+
+* Recursos de cómputo subyacentes, redes, almacenamiento
+* Load Balancer Externos
+* Registry Extena
+* Repositorios de artefactos
+* CICD (por ejemplo Jenkins/Tower/etc)
+| #TODO#
+
+a| Si tenemos MultiCluster Failover:
+
+* Procedimiento de Failover Documentado y Probado
+* Procedimiento de Recovery Documentado y Probado
+| #TODO#
+
+| Backup de Etcd Configurado
+| #TODO#
+
+| Recuperación Etcd Documentado y Probado
+| #TODO#
+
+a| Si es Requerido, Backup de la Infra Configurado y Probado. Debe incluir:
+
+** Logging ElasticSearch
+** Prometheus Metrics
+| #TODO#
+
+| Procedimiento de Disaster Recovery Documentado y Probado
+| #TODO#
+
+|===
+
+.Configuración and Durabilidad
+[cols="85%,15%",options="header"]
+|===
+| *Requisito*  |  *Resultado*
+
+| Requisitos y límites definidos según la calidad del servicio
+| #TODO#
+
+a| Prubas de Liveness y Readiness Definidas y Correctas:
+
+* Las pruebas de Liveness no pruebas el estado del servicio downstream
+| #TODO#
+
+| Las conexiones y solicitudes realizadas a los servicios downstream se reintentan ante una falla o se gestionan manualmente
+| #TODO#
+
+| Las fallas repetidas en los servicios downstream provocan el bloqueo de futuras solicitudes a través de un circuit breaker
+| #TODO#
+
+a| La aplicación se apaga correctamente con un SIGTERM
+
+* Las solicitudes entrantes se gestionan durante el período de gracia
+* Se cierran los sockets inactivos de keep-alive
+| #TODO#
+
+| Prueba de Carga Realizadas:
+
+* ¿Cuál es la capacidad a la máxima latencia permitida en un único clúster?
+| #TODO#
+
+| Prueba funcional Realizadas:
+| #TODO#
+
+| Si el SLA lo exige, escalar a múltiples réplicas
+| #TODO#
+
+| Pod Disruption Budget Defined
+| #TODO#
+
+|===
+
+.Seguridad
+[cols="85%,15%",options="header"]
+|===
+| *Requisito*  |  *Resultado*
+
+| Definición de cuotas de recursos para todos los proyectos de aplicaciones
+| #TODO#
+
+| Pods configurados con los SCC más restrictivos posible
+| #TODO#
+
+| NetworkPolicy definida con precisión para todos los pods
+| #TODO#
+
+| Acceso de usuarios a nombres de espacio auditado
+| #TODO#
+
+a| `ovs-networkpolicy`mínimamente configurado para el aislamiento del proyecto.
+Remitirse a las siguientes descripciones de implementación sugeridas:
+
+* https://github.com/redhat-cop/openshift-toolkit/tree/master/networkpolicy[redhat-cop/openshift-toolkit/networkpolicy]
+* https://blog.openshift.com/networkpolicies-and-microsegmentation/[Blog - NetworkPolicies and Microsegmentation]
+| #TODO#
+
+|===
+
+.Observabilidad
+[cols="85%,15%",options="header"]
+|===
+| *Requisito*  |  *Resultado*
+
+| Registros de las aplicaciones a la salida estándar, registros agregados
+| #TODO#
+
+| De usarse Prometheus, monitores de servicios y reglas definidas
+| #TODO#
+
+|===
