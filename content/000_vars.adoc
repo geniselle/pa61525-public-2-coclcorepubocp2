@@ -16,8 +16,6 @@ used for it or can be found in the default vars/redhat-vars.adoc
 :ocp_bootstrap_memory: 16 GB
 :ocp_bootstrap_disk: 120 GB
 
-:ocp_cluster1_name: TODO_var_ocp_cluster1_name
-:ocp_cluster1_base_domain: TODO_var_ocp_cluster1_base_domain
 :ocp_cluster1_master_cpu: 4
 :ocp_cluster1_master_memory: 16 GB
 :ocp_cluster1_master_disk: 120 GB
