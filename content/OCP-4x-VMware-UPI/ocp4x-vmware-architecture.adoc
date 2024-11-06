@@ -4,3 +4,616 @@ Todos los entornos de OpenShift en ambiente on premise utilizarán el hardware d
 image::OCP-4x-VMware-UPI/ocp-4-cluster-diagrams-on-prem.png[pdfwidth=99%,width=99%]
 
 //TODO: Add description about the architecture diagram
+
+
+= Arquitectura de Bajo Nivel 
+== Despliegue del Cluster
+Debido a las características propias del ambiente del cliente y compatibilidad de las aplicaciones del cliente, se define el modo de instalación del cluster y tópicos clave.
+
+.Cluster data
+[options="header"]
+|===
+|Parámetro | Descripción
+
+|Openshift Version
+|4.14
+
+|Método de instalación
+|UPI
+
+|Nombre del cluster
+|COCLCOREPUBOCP2
+
+|Dominio base
+|corp.popular.local
+
+|===
+
+== Definiciones VMWare
+Para la arquitectura definida, se tienen las siguientes definiciones:
+
+* Almacenamiento disponible para crear nodos (Ver tamaños de almacenamiento)
+* Acceso al puerto 443 en el host ESXi para que el bastión pueda cargar la imagen RHCOS OVA. Los nodos del plano de control deben tener acceso directo hacia la IP/FQDN del ESXi también para la culminación exitosa de la instalación.
+* Las máquinas virtuales se crean a tiempo de instalación del clúster.
+* El direccionamiento IP estático debe estar definido por parte del cliente.
+* El usuario de autenticación al VCenter donde se debe aprovisionar el cluster, debe tener los permisos necesarios para el adecuado despliegue. Para mayor información, puede consultar el siguiente link: https://docs.openshift.com/container-platform/4.14/installing/installing_vsphere/ipi/ipi-vsphere-installation-reqs.html#installation-vsphere-installer-infra-requirements_ipi-vsphere-installation-reqs[vSphere installation requirements - Installing on vSphere | Installing | OpenShift Container Platform 4.14 ]
+
+Se tienen los siguientes datos para el aprovisionamiento de las máquinas virtuales necesarias para el cluster.
+
+.VMware Data
+[options="header"]
+|===
+|Parámetro de VMware | Valor
+
+|vSphere version
+|8.0.2.00200
+
+|vSphere vCenter Host
+|co01vcentercbt.corp.popular.local
+
+|vSphere vCenter Username
+|_openshiftcbt
+
+|vSphere vCenter Datacenter
+|CORE_BANCARIO_CO
+
+|vSphere vCenter Cluster
+|COCLHSHYPCBT1
+
+|vSphere vCenter Default Datastore
+|DS_CBT_COCLCOREPUBOCP2
+
+|Multicast Enabled
+|Si
+
+|Almacenamiento Datastore requerido
+|2328 Gi
+
+|===
+
+Teniendo presente que en producción solo existe la red de servicios (ver información de red), todas las VM para su conectividad usará solamente una VSwitch asociada al direccionamiento dado por el cliente para este propósito.
+
+Se plasma dicha información en el siguiente diagrama.
+
+.Ambiente COCLCOREPUBOCP2
+image::OCP-4x-VMware-UPI/ocp-5-cluster-diagrams.png[pdfwidth=99%,width=99%]
+
+== Componentes del Cluster de OpenShift
+=== Servidor Bastión
+Es una estación de trabajo RHEL (bastión) para usar como jumpbox para nodos OCP y firmada e instalada con las utilidades de implementación y configuración de OpenShift. Esta estación de trabajo se utilizará para instalar y configurar el clúster OCP.
+
+=== Nodos del Plano de Control
+Proporciona servicios básicos de OpenShift, que incluyen:
+
+* API Server - La API REST de OpenShift, incluida la API de Kubernetes
+* Web Console - Consola Web del usuario final.
+* Controller - Gestiona la programación y mantiene el estado de las aplicaciones host (controladores de replicación de Kubernetes)
+* DNS - CoreDNS opera en los planos de control y actúa como el DNS del clúster interno utilizado por los servicios de aplicaciones y los puntos finales.
+* Almacenamiento de datos (etcd) - Una implementación de un almacén de datos etcd agrupado y replicado requerido por OpenShift para administrar el estado del clúster (es decir, todos los objetos de configuración administrados en OpenShift).
+
+=== Nodos worker de infraestructura
+Proporciona servicios de plataforma como registro, routers, logging y métricas.
+
+=== Nodos Worker
+Proporciona capacidad de recursos en tiempo de ejecución para aplicaciones alojadas.
+
+=== Dimensionamiento de los nodos
+
+.Detalles Nodos
+[options=header]
+|===
+|NOMBRE |ROL |vCPUs |MEM(GB) |DISCO(GB) |SO
+
+
+|COHVCAWNOPB01
+|Worker
+|{ocp_cluster1_worker_cpu}
+|{ocp_cluster1_worker_memory}
+|{ocp_cluster1_worker_disk}
+|RHCOS
+
+|COHVCAWNOPB02
+|Worker
+|{ocp_cluster1_worker_cpu}
+|{ocp_cluster1_worker_memory}
+|{ocp_cluster1_worker_disk}
+|RHCOS
+
+|COHVCAWNOPB03
+|Worker
+|{ocp_cluster1_worker_cpu}
+|{ocp_cluster1_worker_memory}
+|{ocp_cluster1_worker_disk}
+|RHCOS
+
+|COHVCAWNOPB04
+|Worker
+|{ocp_cluster1_worker_cpu}
+|{ocp_cluster1_worker_memory}
+|{ocp_cluster1_worker_disk}
+|RHCOS
+
+|COHVCIWNOPB01
+|Infra
+|{ocp_cluster1_infra_cpu}
+|{ocp_cluster1_infra_memory}
+|{ocp_cluster1_infra_disk}
+|RHCOS
+
+|COHVCIWNOPB02
+|Infra
+|{ocp_cluster1_infra_cpu}
+|{ocp_cluster1_infra_memory}
+|{ocp_cluster1_infra_disk}
+|RHCOS
+
+|COHVCIWNOPB03
+|Infra
+|{ocp_cluster1_infra_cpu}
+|{ocp_cluster1_infra_memory}
+|{ocp_cluster1_infra_disk}
+|RHCOS
+
+|COHVCMANOPB01
+|Master
+|{ocp_cluster1_master_cpu}
+|{ocp_cluster1_master_memory}
+|{ocp_cluster1_master_disk}
+|RHCOS
+
+|COHVCMANOPB02
+|Master
+|{ocp_cluster1_master_cpu}
+|{ocp_cluster1_master_memory}
+|{ocp_cluster1_master_disk}
+|RHCOS
+
+|COHVCMANOPB03
+|Master
+|{ocp_cluster1_master_cpu}
+|{ocp_cluster1_master_memory}
+|{ocp_cluster1_master_disk}
+|RHCOS
+
+|COHVCBANOPB01
+|Bastion
+|{ocp_bastion_cpu}
+|{ocp_bastion_memory}
+|{ocp_bastion_disk}
+|RHEL9+
+
+|COHVCBSTOPB01
+|Bootstrap
+|{ocp_bootstrap_cpu}
+|{ocp_bootstrap_memory}
+|{ocp_bootstrap_disk}
+|RHCOS
+
+2+s|TOTAL RECURSOS 
+s|64
+s|312
+s|1730
+|
+
+4+s|SERVICIOS CLUSTER (Logging, Monitoring, Registry)
+s|210
+|
+
+4+s|ALMACENAMIENTO PROYECTADO
+s|2328
+|
+
+|===
+
+== Almacenamiento
+El almacenamiento persistente de la plataforma será proporcionado por VMWare CSI. 
+VSphere por defecto no posee soporte para crear volúmenes RWX (ReadWriteMany). En caso que se requiera tal característica dentro del cluster, el VCenter o ESXi debe tener incorporado y en operación el componente de vSAN File Service. Para mayor información puede remitirse a la siguiente documentación:
+
+https://docs.openshift.com/container-platform/4.14/storage/container_storage_interface/persistent-storage-csi-vsphere.html#persistent-storage-csi-vsphere-rwx_persistent-storage-csi-vsphere[VMware vSphere CSI Driver Operator - Using Container Storage Interface (CSI) | Storage | OpenShift Container Platform 4.14]
+
+https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vsan.doc/GUID-82565B82-C911-42F7-85B1-E9EF973EE90C.html[vSAN File Service]
+
+=== Block Storage
+Los volúmenes tipo bloque serán provisionados de manera dinámica por el driver CSI correspondiente. 
+
+=== File Storage
+Los volúmenes tipo file storage serán provisionados de manera dinámica por el driver CSI.
+
+=== Object Storage
+Para esta instalación no se tiene contemplado este tipo de almacenamiento. En caso de requerirse, BPD tendrá que provisionar un medio adicional para tal tipo de almacén. 
+
+=== Aprovisionamiento de componentes de storage del cluster
+.Componentes Storage
+[options=header]
+|===
+|Aplicación |Tipo de Storage  |Backend de Storage |Tamaño (Gi)
+
+|Metrics
+|Block
+|thin-csi
+a| 100Gi Total:
+
+* Prometheus: 2 x 40Gi=80Gi 
+* AlertManager: 2 x 10Gi=20Gi
+
+|Logging
+|N/A
+|N/A
+|N/A
+
+|Registry
+|Object
+|N/A
+|300 Gi
+
+|Application
+|-
+|-
+|-
+|===
+
+WARNING: Para el caso del registry, considere el uso de un volumen persistente en modo RWX, en caso de no poder aprovisionar un backend de storage tipo Object. De lo contrario solo se podrá desplegar un volumen en modo RWO para propósitos de la instalación y garantías de funcionamiento de la solución.
+
+Se presenta el siguiente diagrama del componente de almacenamiento
+
+.Diagrama Almacenamiento
+image::OCP-4x-VMware-UPI/Diagrama-Almacenamiento-COCLHSHYPCBT1.png[pdfwidth=99%,width=99%]
+
+== Conectividad
+Se presenta el siguiente diagrama para el esquema de conectividad del cluster a aprovisionar.
+
+.Diagrama Conectividad
+image::OCP-4x-VMware-UPI/Conectividad-cluster-COCLHSHYPCBT1.png[pdfwidth=99%,width=99%]
+
+=== Información de red del Cluster
+Se define la siguiente información de las redes necesarias para el aprovisionamiento del cluster.
+
+.Información de red
+[options="header"]
+|===
+|Nombre | CIDR Bloque o Valor | Comentarios
+
+|VNet
+|10.32.75.0/24
+|Red definida para el direccionamiento de los nodos del cluster
+
+|Pod Network
+|10.71.0.0/16
+|Red no enrutable para los pods del cluster
+
+|Service Network
+|10.72.0.0/16
+|Red no enrutable para los objetos services del cluster.
+
+|LoadBalancers Network
+a|
+- 10.32.0.0/16 - Datacenter CO
+- 10.16.0.0/16 - Cluster Citrix LB
+|Red definida para las VIP de los balanceadores.
+
+|===
+
+Las subredes de la red son:
+
+* Host LAN subred con suficientes direcciones libres para admitir los hosts/VM de OpenShift y cualquier IP adicional para las IP de salida o los enrutadores de salida.
+
+* OpenShift SDN se utiliza para proporcionar direcciones para cada instancia de aplicación (pod) o réplica (es decir, el número total de "Pods"), por lo que requiere un rango lo suficientemente grande como para soportar los picos previstos en la demanda del servicio. El bloque CIDR de esta red no debe entrar en conflicto con otras redes.
+
+* Los VIP de servicio se utilizan para proporcionar direcciones IP virtuales para los servicios de OpenShift; generalmente, esto será equivalente a la cantidad de aplicaciones de OpenShift. El bloque CIDR de esta red no debe entrar en conflicto con otras redes.
+
+=== Información de red para los nodos
+El siguiente diagrama ilustra las diversas subredes de red utilizadas por OpenShift en este entorno.
+
+
+.Información Nodos
+[options="header"]
+|===
+|Nombre |Rol |IP |Gateway
+
+|COHVCAWNOPB01
+|Worker
+|10.32.75.20
+|10.32.75.1
+
+|COHVCAWNOPB02
+|Worker
+|10.32.75.21
+|10.32.75.1
+
+|COHVCAWNOPB03
+|Worker
+|10.32.75.22
+|10.32.75.1
+
+|COHVCAWNOPB04
+|Worker
+|10.32.75.23
+|10.32.75.1
+
+|COHVCIWNOPB01
+|Infra
+|10.32.75.24
+|10.32.75.1
+
+|COHVCIWNOPB02
+|Infra
+|10.32.75.25
+|10.32.75.1
+
+|COHVCIWNOPB03
+|Infra
+|10.32.75.26
+|10.32.75.1
+
+|COHVCMANOPB01
+|Master
+|10.32.75.27
+|10.32.75.1
+
+|COHVCMANOPB02
+|Master
+|10.32.75.28
+|10.32.75.1
+
+|COHVCMANOPB03
+|Master
+|10.32.75.29
+|10.32.75.1
+
+|COHVCBANOPB01
+|Bastion
+|10.32.75.30
+|10.32.75.1
+
+|COHVCBSTOPB01
+|Bootstrap
+|10.32.75.71
+|10.32.75.1
+
+|===
+
+=== Load Balancers (LB)
+Se debe generar la configuración correspondiente a los LB de la siguiente manera.
+
+.Información Balanceadores
+[options="header"]
+|===
+|Nombre |Backend |VIP |URL |Puertos a balancear
+
+|API
+a|
+* 10.32.75.17
+* 10.32.75.18
+* 10.32.75.19
+* 10.32.75.71 (bootstrap - temporal)
+|10.32.75.243
+a|
+* api.COCLCOREPUBOCP2.corp.popular.local
+* api-int.COCLCOREPUBOCP2.corp.popular.local
+a|
+* 6443
+* 22623
+
+|Ingress
+a|
+* 10.32.75.14
+* 10.32.75.15
+* 10.32.75.16
+|10.32.75.242
+|*.apps.COCLCOREPUBOCP2.corp.popular.local
+a|
+* 80
+* 443
+
+|Cluster VIP Ingress
+a|* 10.32.75.242
+|10.16.0.124
+|
+a|* 443
+
+|===
+
+[NOTE]
+====
+Bootstrap debe ser removido del balanceo posterior a la instalación. Solo es necesario para el proceso de aprovisionamiento de los nodos master.
+====
+
+=== Terminación SSL 
+Por defecto en el proceso de instalación, el cluster genera sus certificados SSL con sus certificados autofirmados. En caso de requerir certificados emitidos por la CA interna del cliente deben tener en cuenta los siguientes ítems:
+
+* Se pueden cambiar los certificados del API de cluster y del ingress. Estos deben quedar directamente en el cluster.
+
+
+* A nivel de los LoadBalancer, la VIP indicada para cada dominio, se debe dejar la terminación SSL en passthrough. En caso que se tenga un balanceo externo que use certificados propios para sus tareas de gestión, este debe garantizar que la convivencia del protocolo SSL no afecte la redirección de tráfico. 
+
+
+* Para el cambio de los certificados del ingress, tener en cuenta los siguientes prerrequisitos:
+
+
+    - Debe tener un certificado wildcard para el subdominio .apps completo y su correspondiente clave privada. Cada uno debe estar en un archivo separado en formato PEM.
+    - La clave privada debe estar sin cifrar. Si la clave está cifrada, descifrar antes de importarla a OpenShift Container Platform.
+    - El certificado debe incluir la extensión subjectAltName que muestra *.apps.COCLCOREPUBOCP2.corp.popular.local
+    - El archivo de certificado puede contener uno o varios certificados en cadena. El certificado wildcard debe ser el primer certificado del archivo. Puede ir seguido de cualquier certificado intermedio y el archivo debe terminar con el certificado de CA raíz.
+    - Copie el certificado de CA raíz en un archivo adicional con formato PEM.
+    - Compruebe que todos los certificados que incluyen *-----END CERTIFICATE-----* también terminan con un retorno de carro después de esa línea.
+
+* Para el cambio de los certificados del API, tener en cuenta los siguientes prerrequisitos:
+
+    - Debe tener un certificado para el FQDN y su correspondiente clave privada. Cada uno debe estar en un archivo separado en formato PEM.
+    - La clave privada debe estar sin cifrar. Si la clave está cifrada, descifrar antes de importarla a OpenShift Container Platform.
+    - El certificado debe incluir la extensión subjectAltName que muestra el FQDN.
+    - El archivo de certificado puede contener uno o varios certificados en cadena. El certificado para el FQDN del servidor de API debe ser el primer certificado del archivo. Puede ir seguido de cualquier certificado intermedio y el archivo debe terminar con el certificado de la CA raíz.
+
+=== Entradas DNS
+Se indican los siguientes registros de DNS para la implementación del cluster.
+
+.Información DNS
+[options="header"]
+|===
+|DNS Record |Hostname |Record |IP
+
+|A/PTR
+|COHVCAWNOPB01
+|cohvcawnopb01.coclcorepubocp2.corp.popular.local
+|10.32.75.20
+
+|A/PTR
+|COHVCAWNOPB02
+|cohvcawnopb02.coclcorepubocp2.corp.popular.local
+|10.32.75.21
+
+|A/PTR
+|COHVCAWNOPB03
+|cohvcawnopb03.coclcorepubocp2.corp.popular.local
+|10.32.75.22
+
+|A/PTR
+|COHVCAWNOPB04
+|cohvcawnopb04.coclcorepubocp2.corp.popular.local
+|10.32.75.23
+
+|A/PTR
+|COHVCIWNOPB01
+|cohvciwnopb01.coclcorepubocp2.corp.popular.local
+|10.32.75.24
+
+|A/PTR
+|COHVCIWNOPB02
+|cohvciwnopb02.coclcorepubocp2.corp.popular.local
+|10.32.75.25
+
+|A/PTR
+|COHVCIWNOPB03
+|cohvciwnopb03.coclcorepubocp2.corp.popular.local
+|10.32.75.26
+
+|A/PTR
+|COHVCMANOPB01
+|cohvcmanopb01.coclcorepubocp2.corp.popular.local
+|10.32.75.27
+
+|A/PTR
+|COHVCMANOPB02
+|cohvcmanopb02.coclcorepubocp2.corp.popular.local
+|10.32.75.28
+
+|A/PTR
+|COHVCMANOPB03
+|cohvcmanopb03.coclcorepubocp2.corp.popular.local
+|10.32.75.29
+
+|A/PTR
+|COHVCBANOPB01
+|cohvcbanopb01.coclcorepubocp2.corp.popular.local
+|10.32.75.30
+
+|A/PTR
+|COHVCBSTOPB01
+|cohvcbstopb01.coclcorepubocp2.corp.popular.local
+|10.32.75.71
+
+|A/CNAME
+|API
+|api.coclcorepubocp2.corp.popular.local
+|10.32.75.243
+
+|A/CNAME
+|API-INT
+|api-int.coclcorepubocp2.corp.popular.local
+|10.32.75.243
+
+|A/CNAME
+|*.APPS
+|*.apps.coclcorepubocp2.corp.popular.local
+|10.32.75.242
+
+|===
+
+WARNING: Se debe garantizar la resolución directa e inversa de estos registros DNS. Se recomienda que se encuentre dentro de una zona de autoridad dedicada.
+
+=== Puertos requeridos para la instalación del cluster
+Se requiere la siguiente relación de reglas para el funcionamiento del cluster
+
+.Información Puertos
+[options="header"]
+|===
+|Protocolo |Puerto |Origen |Destino 
+
+|ICMP
+|N/A
+|10.32.75.0/24
+|10.32.75.0/24
+
+|TCP
+a|
+* 9000-9999
+* 1936
+* 10250-10259
+|10.32.75.0/24
+|10.32.75.0/24
+
+|UDP
+a|
+* 4789
+* 6081
+* 9000-9999
+* 500
+* 4500
+* 123
+|10.32.75.0/24
+|10.32.75.0/24
+
+|TCP/UDP
+a|
+* 30000-32767
+|10.32.75.0/24
+|10.32.75.0/24
+
+|ESP
+|N/A
+|10.32.75.0/24
+|10.32.75.0/24
+
+|TCP/UDP
+a|
+* 6443
+|10.32.75.0/24
+|Nodos Control Plane
+
+|TCP
+a|
+* 2379-2380
+|Nodos control plane
+|Nodos Control Plane
+
+|===
+
+Todos los puertos para el tráfico saliente deben estar abiertos.
+
+=== Servicios de red requeridos para la instalación del cluster
+Se tiene la siguiente información para los servicios de red necesarios para la instalación del cluster
+
+.Servicios de red
+[options="header"]
+|===
+|Parámetro | Descripción
+
+|Internet Connection
+|Via Proxy
+
+|HTTP Proxy
+|http://10.48.17.17:85
+
+|HTTPS Proxy
+|http://10.48.17.17:85
+
+|Excepciones de proxy
+|
+
+|Servidores NTP 
+|10.32.2.51, 10.32.2.59
+
+|Servidores DNS
+|10.32.2.25, 10.32.2.26, 10.64.2.12, 10.64.2.22
+
+|===

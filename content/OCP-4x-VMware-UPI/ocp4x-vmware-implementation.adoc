@@ -21,7 +21,7 @@ Para la arquitectura definida se consideran los siguientes datos correspondiente
 |co01vcentercbt.corp.popular.local
 
 |VvSphere vCenter Username
-|ntas\_openshiftcbt
+|_openshiftcbt
 
 |vSphere vCenter Datacenter
 |CORE_BANCARIO_CO
@@ -148,10 +148,10 @@ a|
 |Metrics
 |Block
 |thin-csi
-a| 110Gi Total:
+a| 100Gi Total:
 
 * Prometheus: 2 x 40Gi=80Gi 
-* AlertManager: 3 x 10Gi=30Gi
+* AlertManager: 2 x 10Gi=20Gi
 
 |Logging
 |N/A
@@ -161,7 +161,7 @@ a| 110Gi Total:
 |Registry
 |Object
 |N/A
-|100+ Gi
+|300+ Gi
 
 |Application
 |-

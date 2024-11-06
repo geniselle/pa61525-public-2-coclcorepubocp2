@@ -37,13 +37,13 @@ additions and customer requested updates.
 |Versión inicial
 
 // Version
-| x.x
+| 2.0
 // Date
-| aaaa-mm-dd
+| 2024-10-29
 // Autor
-|Autor
+| Camila Pino
 //Función
-|-
+|Consultor
 //Descripción
-|-
+|Registro de Arquitectura e Implementación
 |===

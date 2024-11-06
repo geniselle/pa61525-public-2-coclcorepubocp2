@@ -52,26 +52,26 @@ include::content/070_participantes-clientes.adoc[leveloffset=+4]
 == Resumen Ejecutivo
 include::content/080_resumen-ejecutivo.adoc[leveloffset=+2]
 
-<<<
-== Visión general
+// <<<
+// == Visión general
 
-=== Acerca de {cust}
-include::content/090_sobre-el-cliente.adoc[leveloffset=+3]
+// === Acerca de {cust}
+// include::content/090_sobre-el-cliente.adoc[leveloffset=+3]
 
-=== Documentos entregados por {cust}
-include::content/100_documentos-dado-cliente.adoc[leveloffset=+3]
+// === Documentos entregados por {cust}
+// include::content/100_documentos-dado-cliente.adoc[leveloffset=+3]
 
-=== Propósito y enfoque
-include::content/110_proposito-y-enfoque.adoc[leveloffset=+3]
+// === Propósito y enfoque
+// include::content/110_proposito-y-enfoque.adoc[leveloffset=+3]
 
-=== Resumen del alcance
-include::content/120_resumen-del-alcance.adoc[leveloffset=+3]
+// === Resumen del alcance
+// include::content/120_resumen-del-alcance.adoc[leveloffset=+3]
 
-<<<
-== Detalles de implementación
+// <<<
+// == Detalles de implementación
 
-=== Diario
-include::content/130_diario.adoc[leveloffset=+3]
+// === Diario
+// include::content/130_diario.adoc[leveloffset=+3]
 
 <<<
 === Arquitectura
@@ -81,29 +81,29 @@ include::content/140_architectura.adoc[leveloffset=+3]
 === Implementación técnica
 include::content/150_implementacion.adoc[leveloffset=+3]
 
-<<<
-=== Validación
-include::content/160_validacion.adoc[leveloffset=+3]
+// <<<
+// === Validación
+// include::content/160_validacion.adoc[leveloffset=+3]
 
-<<<
-=== Traspaso de conocimiento
-include::content/170_conocimiento.adoc[leveloffset=+3]
+// <<<
+// === Traspaso de conocimiento
+// include::content/170_conocimiento.adoc[leveloffset=+3]
 
-<<<
-=== Incidencias, resoluciones y recomendaciones
-include::content/180_problemas_resoluciones.adoc[leveloffset=+3]
+// <<<
+// === Incidencias, resoluciones y recomendaciones
+// include::content/180_problemas_resoluciones.adoc[leveloffset=+3]
 
-<<<
-== Recomendaciones
+// <<<
+// == Recomendaciones
 
-=== Recomendaciones técnicas
-include::content/190_recomendaciones-tecnicales.adoc[leveloffset=+3]
+// === Recomendaciones técnicas
+// include::content/190_recomendaciones-tecnicales.adoc[leveloffset=+3]
 
-=== Formación relevante
-include::content/200_recomendaciones-entrenamiento-relevante.adoc[leveloffset=+3]
+// === Formación relevante
+// include::content/200_recomendaciones-entrenamiento-relevante.adoc[leveloffset=+3]
 
-=== Otras recomendaciones
-include::content/210_otra-recomendaciones.adoc[leveloffset=+3]
+// === Otras recomendaciones
+// include::content/210_otra-recomendaciones.adoc[leveloffset=+3]
 
 <<<
 [appendix]
@@ -114,15 +114,15 @@ include::content/220_glosario.adoc[leveloffset=+2]
 // It is expected that anyone using additional-appendices.adoc will include one or more [appendix] blocks
 include::content/230_apendice_adicionales.adoc[leveloffset=+1]
 
-<<<
-[appendix]
-== Enlaces aplicables
-include::content/240_enlaces-aplicable.adoc[leveloffset=+2]
+// <<<
+// [appendix]
+// == Enlaces aplicables
+// include::content/240_enlaces-aplicable.adoc[leveloffset=+2]
 
-<<<
-[appendix]
-== Declaración del trabajo
-include::content/250_declaracion-de-trabajo.adoc[leveloffset=+2]
+// <<<
+// [appendix]
+// == Declaración del trabajo
+// include::content/250_declaracion-de-trabajo.adoc[leveloffset=+2]
 
 <<<
 [appendix]

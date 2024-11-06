@@ -8,7 +8,7 @@ If the product directory is missing a corresponding "vars.adoc", vars are not
 used for it or can be found in the default vars/redhat-vars.adoc
 ////
 
-:titulo: Documento de Arquitectura OpenShift Container Platform - T-Menos
+:titulo: Documento de Arquitectura e Implementación OpenShift Container Platform - Temenos
 :cliente: Banco Popular Dominicano
 :descripción: Ambiente COCLCOREPUBOCP2
 :ocp_version: 4.14

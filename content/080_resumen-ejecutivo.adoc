@@ -19,4 +19,9 @@ Ejemplo
 Red Hat Consulting was engaged by Acme Inc. to assist with the Application Standardization 2.0 Project.  Three Ansible Tower clusters were established to serve Dev, Test and Prod environments.  Red Hat Consulting collaborated on the creation of 135 compliance and remediation playbooks, and over the course of the engagement scanned the entire Dev environment automatically bringing nearly 200 non-compliant services into compliance and flagging an additional 50 for manual remediation.  Acme's ServiceNow environment now has up-to-date compliance status on every application identified in the Dev environment.  During the course of the engagement three separate demonstrations were provided to Acme executive management as well as several knowledge transfer sessions crafted to ensure that Acme is enabled to begin scanning Test and Prod environments on their own after the necessary approvals.
 
 ////
-{cliente} contrató los servicios de Red Hat Consulting para asistirlo con (#TODO# descripción de alto nivel del proyecto).
+Banco Popular Dominicano, ha encargado a Red Hat Consulting la implementación de Clusters OpenShift Container Platform en su infraestructura vSphere, para soportar el entorno Productivo del Core Bancario que ejecutará la solución Temenos.
+
+En el marco de esta tarea, el presente documento detalla tanto las configuraciones utilizadas para la implementación del cluster, como también el procedimiento utilizado paso a paso de forma tal que frente a la eventualidad de necesitar reinstalar este cluster, este pueda servir como guía para dicho propósito.
+El documento inicia con un diagrama de los distintos componentes del cluster (nodos y roles de cada uno) para luego pasar por aquellos elementos que constituyen los prerrequisitos de una instalación de este tipo y finalmente, describir con detalles los pasos, configuraciones y recomendaciones (para revisión o comprobación) de las distintas etapas que conlleva una instalación.
+
+Dentro de este documento también se encuentran referenciadas las credenciales utilizadas y/o generadas para acceder al cluster y sus nodos, por lo cual se recomienda manejar la distribución con discreción.

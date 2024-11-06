@@ -8,39 +8,5 @@ delivered.
 If "TODO" appears in your document after the init script has been run, then your product directory is missing a corresponding "architecture.adoc" which should be implemented to provide a basic architecture framework for that product.
 ////
 
-#TODO#: La sección de Arquitectura contiene títulos que corresponden a la solución en su conjunto. Las tecnologías específicas que añada al CER serán agregadas al final de esta sección como referencia. Puede modificar libremente los títulos de primer nivel que ya están cubiertos en las secciones adicionales y no son genéricamente relevantes.
-
-= Diagrama de alto nivel
-#TODO#
-
-= Configuración del entorno
-Pasos para preparar o crear el entorno de la arquitectura propuesta.
-
-#TODO#
-
-=  Integración continua/Entrega continua
-#TODO#
-
-= Estrategia de calidad del servicio
-Se realizaron las siguientes consideraciones para garantizar el uptime en la empresa.
-
-== High Availability
-#TODO#
-
-== Failover
-#TODO#
-
-== Disaster Recovery
-#TODO#
-
-= Acuerdos de Nivel de Servicio y volumetría
-#TODO#
-
-= Solución de Logging y Monitoring
-#TODO#
-
-= Consideraciones de Seguridad
-#TODO#
-
 = Red Hat OpenShift Container Platform 4 - VMware vSphere Architecture
 include::OCP-4x-VMware-UPI/ocp4x-vmware-architecture.adoc[leveloffset=+1]

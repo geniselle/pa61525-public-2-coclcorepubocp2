@@ -9,23 +9,27 @@ decision making or implementation.
 
 ////
 .{cust} Participantes
-[cols="4,5,3",options=header]
+[options=header]
 |===
-|Nombre
-|Rol
-|Correo Electronico
+|Nombre |Correo Electronico
 
-// Name
-| #TODO#
-// Function
-| #TODO#
-// E-mail address
-| #TODO#
+// Nombre
+|Giraldy Reyes Rodríguez
+// Correo Electronico
+|gireyes@bpd.com.do
 
-// Name
-| #TODO#
-// Function
-| #TODO#
-// E-mail address
-| #TODO#
+// Nombre
+|Juan Leonardo de la Cruz Reyes
+// Correo Electronico
+|jldelacruz@bpd.com.do
+
+// Nombre
+|Rolfi Domingo Rojas Rosario
+// Correo Electronico
+|rolfirojas@bpd.com.do
+
+// Nombre
+|Roberto Antonio Rosario Rincón
+// Correo Electronico
+|rrosario@bpd.com.do 
 |===

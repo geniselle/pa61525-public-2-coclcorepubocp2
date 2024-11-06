@@ -10,7 +10,6 @@ your product directory is missing a corresponding "validation.adoc" which
 should be implemented to provide a basic validation framework for that product.
 ////
 
-#TODO#
 
 = Red Hat OpenShift Container Platform 4 - VMware vSphere
 include::OCP-4x-VMware-UPI/ocp4x-vmware-pre-deployment-validation.adoc[leveloffset=+1]
